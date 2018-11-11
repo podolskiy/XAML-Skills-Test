@@ -2,7 +2,8 @@
 This test I made in 2013.
 
 ## Task
-This image fully describes the task. You need to make a xaml-file that will look the same as in the picture.
+This image fully describes the task. You need to make only one xaml-file that will look the same as in the picture.
+Task will be checked in Kaxaml.
 
 ![Task](https://github.com/podolskiy/XAML-Skills-Test/blob/master/test_xaml.jpg?raw=true)
 
