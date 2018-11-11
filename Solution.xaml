@@ -1,0 +1,109 @@
+<Page x:Class="Page"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Page.Resources>
+        <XmlDataProvider x:Key="TestData" XPath="/Descriptions">
+            <x:XData>
+                <Descriptions xmlns="" GlobalTitle="Test: UI development based on WPF and XAML. - An example illustrating mastering the basics of XAML.">
+                    <Article TestingAngle="10">
+                        <Title>Requires ability to manipulate XML data using XPath.</Title>
+                        <Nums Color="Magenta" Thick="2" SegmentWidth="20">
+                            <Sample Val="3" />
+                            <Sample Val="12" />
+                            <Sample Val="3" />
+                            <Sample Val="103" />
+                            <Sample Val="9" />
+                            <Sample Val="143" />
+                            <Sample Val="23" />
+                        </Nums>
+                    </Article>
+                    <Article TestingAngle="45">
+                        <Title>Requires experience using Microsoft Expression Blend 4.</Title>
+                        <Nums Color="Green" Thick="2" SegmentWidth="20">
+                            <Sample Val="80" />
+                            <Sample Val="40" />
+                            <Sample Val="20" />
+                            <Sample Val="10" />
+                            <Sample Val="20" />
+                            <Sample Val="40" />
+                            <Sample Val="80" />
+                        </Nums>
+                    </Article>
+                    <Article TestingAngle="25">
+                        <Title>Requires experience with the WPF object model in the C # programming language</Title>
+                        <Nums Color="Blue" Thick="2" SegmentWidth="20">
+                            <Sample Val="130" />
+                            <Sample Val="4" />
+                            <Sample Val="132" />
+                            <Sample Val="10" />
+                            <Sample Val="134" />
+                            <Sample Val="6" />
+                            <Sample Val="6" />
+                        </Nums>
+                    </Article>
+                </Descriptions>
+            </x:XData>
+        </XmlDataProvider>
+
+        <DataTemplate x:Key="TestDataTemplate">
+            <StackPanel Margin="3" Orientation="Horizontal" >
+                <TextBlock Margin="3,20" Width="240" Foreground="White" FontSize="15" FontWeight="Bold"  Text="{Binding XPath=Title}" TextWrapping="WrapWithOverflow"/>
+                <Label />
+                <Grid Margin="5" Width="200" Height="200" >
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                            <GradientStop Color="White" Offset="0.0" />
+                            <GradientStop Color="black" Offset="1" />
+                            <LinearGradientBrush.Transform>
+                                <RotateTransform CenterX="-10" CenterY="10" Angle="{Binding XPath=@TestingAngle}" />
+                            </LinearGradientBrush.Transform>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <TextBlock FontSize="15" Text="{Binding XPath=@TestingAngle, StringFormat='Angle {0} degree'}" Margin="40" TextDecorations="Overline, Underline"  >
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform CenterX="-10" CenterY="10" Angle="{Binding XPath=@TestingAngle}"/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </Grid>
+                <Grid Margin="5"  Width="200" Height="200" Background="White" >
+                    <Line X1="10" Y1="0" X2="10" Y2="200" Stroke="Black" StrokeThickness="{Binding XPath=//Nums/@Thick}"/>
+                    <Line X1="0" Y1="190" X2="200" Y2="190" Stroke="Black" StrokeThickness="{Binding XPath=//Nums/@Thick}"/>
+                    <ItemsControl ScrollViewer.VerticalScrollBarVisibility="Disabled" BorderBrush="White"  Margin="30,0,0,15" Background="White" ItemsSource="{Binding XPath=Nums/Sample}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="{Binding XPath=../@SegmentWidth}" Height="200">
+                                    <Line X1="0" Y1="{Binding XPath=@Val}" X2="{Binding XPath=../@SegmentWidth}" Y2="{Binding XPath=following-sibling::Sample/@Val}" Stroke="{Binding XPath=../@Color}" StrokeThickness="{Binding XPath=//Nums/@Thick}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"></StackPanel>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.LayoutTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="-1"/>
+                        </ItemsControl.LayoutTransform>
+                    </ItemsControl>
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="#DDD">
+        <StackPanel >
+            <TextBlock  FontSize="14" FontWeight="Bold" Margin="10" TextDecorations="Underline"
+          Text="{Binding Source={StaticResource TestData}, XPath=//Descriptions/@GlobalTitle}" />
+            <ItemsControl
+               Background="#999"
+               BorderThickness="2"
+               BorderBrush="White"
+               Margin="10"
+               ItemsSource="{Binding Source={StaticResource TestData}, XPath=Article}"
+               ItemTemplate="{StaticResource TestDataTemplate}"/>
+        </StackPanel>
+    </Grid>
+
+</Page>
