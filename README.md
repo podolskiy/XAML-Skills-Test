@@ -8,7 +8,6 @@ Task will be checked in Kaxaml.
 ![Task](https://github.com/podolskiy/XAML-Skills-Test/blob/master/test_xaml.jpg?raw=true)
 
 ## Solution
-XAML-file divided in three parts.
 1. So, for data storage in a xaml I've used **XmlDataProvider**, which is provided especially for this purpose.
 2. To describe template for list elements, I've used special **DataTemplate** xaml-element.
 
