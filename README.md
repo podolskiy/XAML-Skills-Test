@@ -1,4 +1,4 @@
-# XAML-Skills-Test
+# XAML Skills Test
 This test I made in 2013.
 
 ## Task
