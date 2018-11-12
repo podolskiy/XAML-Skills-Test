@@ -8,8 +8,7 @@ Task will be checked in Kaxaml.
 ![Task](https://github.com/podolskiy/XAML-Skills-Test/blob/master/test_xaml.jpg?raw=true)
 
 ## Solution
-1. So, for data storage in a xaml I've used **XmlDataProvider**, which is provided especially for this purpose.
-2. To describe template for list elements, I've used special **DataTemplate** xaml-element.
+For the Binding to XML inside XAML purpose, I've used the **XmlDataProvider**.
 
 ## Sources
 You can download the Kaxaml XAML editor to check how exactly the solution looks on the screen and how it works.
